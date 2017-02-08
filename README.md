@@ -4,7 +4,16 @@ Matt Keeter's [ao](https://github.com/mkeeter/ao) translated into Clojurescript.
 
 ## Overview
 
-ao is programmatic CAD based on functional representation of shapes.
+Ao is a programmatic CAD tool based on a functional representation of shapes, with Scheme as its scripting language.
+Links:
+- [github](https://github.com/mkeeter/ao)
+- [project page](https://www.mattkeeter.com/projects/ao/)
+- [pdf overview](https://www.mattkeeter.com/research/ao_poster.pdf)
+
+##### Background Papers
+
+- [Interval Arithmetic and Recursive Subdivision for Implicit Functions and Constructive Solid Geometry](http://fab.cba.mit.edu/classes/S62.12/docs/Duff_interval_CSG.pdf)
+- [Adaptively Sampled Distance Fields](http://www.merl.com/publications/docs/TR2000-15.pdf)
 
 ## Setup
 
