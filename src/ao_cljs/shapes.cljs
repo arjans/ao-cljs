@@ -4,9 +4,6 @@
    [ao-cljs.csg :as c]
    [ao-cljs.transforms :as t]))
 
-;; Depends on: set-bounds, union, atan, sqrt
-;; intersection, edge, taper-xy-z
-
 (defn square [x] (* x x))
 
 (defn average [& xs] (/ (apply + xs) (count xs)))
@@ -59,7 +56,7 @@
                 (and (< tb ta) (< tb tc)) [tb tc ta]
                 (and (< tc ta) (< tc tb)) [tc ta tb]
                 :else                     [ta tb tc])
-        clockwise (if (> (nth sorted 2) (nth sorted 1))
+        clockwise (if (> (sorted 2) (sorted 1))
                       [a c b]
                       [a b c])
         [[xa ya] [xb yb] [xc yc]] clockwise]
