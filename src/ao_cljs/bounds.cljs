@@ -4,11 +4,6 @@
 ;; This generally seems hacky.
 ;; Re-write with maps?
 
-(defn set-default-bounds [f]
-  (set-bounds f
-              [-Infinity -Infinity -Infinity]
-              [+Infinity +Infinity +Infinity]))
-
 (defn set-bounds [f [x y z] [x' y' z']]
   (let [z (or z -Infinity)
         z' (or z' +Infinity)]
@@ -17,6 +12,11 @@
                (= (nth args 0) :bounds))
         [[x y z] [x' y' z']]
         (apply f args)))))
+
+(defn set-default-bounds [f]
+  (set-bounds f
+              [-Infinity -Infinity -Infinity]
+              [+Infinity +Infinity +Infinity]))
 
 ;; Not sure this works for all f.
 (defn bounds [f]

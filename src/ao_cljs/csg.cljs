@@ -1,39 +1,40 @@
 (ns ao-cljs.csg
-  (:require))
+  (:require
+   [ao-cljs.bounds :as b]))
 
 (defn union
   ([] "Too few args.") ;; Throw error.
   ([& shapes]
-   (let [bs (map bounds shapes)
+   (let [bs (map b/bounds shapes)
          f (fn [x y z] (apply min (map #(% x y z) shapes)))]
      (if (every? identity bs)
-       (let [[l u] (bounds-union bs)]
-         (set-bounds f l u))
+       (let [[l u] (b/bounds-union bs)]
+         (b/set-bounds f l u))
        f))))
 
 (defn intersection
   ([] "Too few args.") ;; Throw error.
   ([& shapes]
-   (let [bs (map bounds shapes)
+   (let [bs (map b/bounds shapes)
          f (fn [x y z] (apply max (map #(% x y z) shapes)))]
      (if (every? identity bs)
-       (let [[l u] (bounds-intersection bs)]
-         (set-bounds f l u))
+       (let [[l u] (b/bounds-intersection bs)]
+         (b/set-bounds f l u))
        f))))
 
 (defn inverse [f]
   (let [f' (fn [x y z] (- (f x y z)))]
-    (if (bounds f)
-      (set-default-bounds f')
+    (if (b/bounds f)
+      (b/set-default-bounds f')
       f')))
 
 (defn difference [f & fs]
   (intersection f (inverse (apply union fs))))
 
-(defn offset [f x]
-  (let [f' (fn [x y z] (- (f x y z) x))]
-    (if (bounds f)
-      (set-default-bounds f')
+(defn offset [f x0]
+  (let [f' (fn [x y z] (- (f x y z) x0))]
+    (if (b/bounds f)
+      (b/set-default-bounds f')
       f')))
 
 (defn clearance [f g x]
